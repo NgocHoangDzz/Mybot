@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTG BOT</title>
+  <link rel="icon" href="https://i.ibb.co/7t9rgxxz/Messenger-creation-90-FCED4-D-D1-F8-4-FCB-9036-ADFA6-C41-AF5-F.jpg" type="image/png">
+  <style>
+    * { box-sizing: border-box; }
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      background: url('https://cdn.discordapp.com/attachments/1370542456361324596/1370780024273375353/bd054497ce4283eb16911911eb8d1f1b.jpg?ex=682166a1&is=68201521&hm=f8df8f8523b9ace35abd6230f7670157ca347abcb8b2d64dbc90102258bb08fd&') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .logo {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 2;
+    }
+    .logo img {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      border: 2px solid white;
+    }
+    .chat-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px;
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      color: white;
+      padding: 5px 5px 5px 100px;
+    }
+    .chat-input {
+      display: flex;
+      gap: 10px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: none;
+    }
+    .chat-input button {
+      padding: 10px 20px;
+      background-color: #00faff;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <img src="https://i.ibb.co/7t9rgxxz/Messenger-creation-90-FCED4-D-D1-F8-4-FCB-9036-ADFA6-C41-AF5-F.jpg" alt="HTG BOT">
+  </div>
+
+  <div class="chat-container">
+    <div class="chat-box" id="chat-box">
+      <div><strong>HTG BOT:</strong> Xin chào! Tôi có thể giúp gì cho bạn hôm nay?</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Nhập tin nhắn..." />
+      <button onclick="sendMessage()">Gửi</button>
+    </div>
+  </div>
+
+  <script>
+    function smartReply(message) {
+      const msg = message.toLowerCase();
+      
+      if (msg.includes("script tonghop")) return 'Script Tổng Hợp: <a href="https://notevn.com/raw/80u2yaw3" target="_blank">Script Link</a>';
+      if (msg.includes("script main")) return 'Script main HTG: <a href="https://notevn.com/raw/3fyqked5" target="_blank">Script Link</a>';
+      if (msg.includes("script cmds")) return 'Script cmds: <a href="https://notevn.com/raw/97b35dfk" target="_blank">Script Link</a>';
+      if (msg.includes("script1")) return 'Script Tổng Hợp 1: <a href="https://notevn.com/raw/97b35dfk" target="_blank">Script Link</a>';
+      if (msg.includes("script2")) return 'Script Tổng Hợp 2: <a href="https://notevn.com/raw/97b35dfk" target="_blank">Script Link</a>';
+      if (msg.includes("script nor")) return ' All Script nor: <a href="https://raw.githubusercontent.com/NgocHoangDzz/Nor-and-Vip/refs/heads/main/Normal%20script" target="_blank">Script Normal Link</a>';
+      if (msg.includes("script vip")) return ' All Script VIP: <a href="https://raw.githubusercontent.com/NgocHoangDzz/Nor-and-Vip/refs/heads/main/Vip%20script" target="_blank">Script VIP Link</a>';
+
+      if (msg.includes("link norgit")) return 'Link 2: <a href="https://raw.githubusercontent.com/NgocHoangDzz/BotChat/refs/heads/main/Normal%20BOT%20Link" target="_blank">Click Link here</a>';
+      if (msg.includes("link vipgit")) return 'Link VIP: <a href="https://raw.githubusercontent.com/NgocHoangDzz/BotChat/refs/heads/main/BOT-Link%20All" target="_blank">VIP Link👑</a>';
+      if (msg.includes("wed")) return 'Link Wed me: <a href="https://raw.githubusercontent.com/NgocHoangDzz/Trang-wed-C-a-t-i/refs/heads/main/All%20wed%20link" target="_blank">Click Link here</a>';
+      if (msg.includes("dis") || msg.includes("discord")) return 'Link Discord: <a href="https://discord.gg/YkRK3DRHN4" target="_blank">Click Link here</a>';
+
+      if (msg.includes("allsexlink")) return 'Link: <a href="https://raw.githubusercontent.com/NgocHoangDzz/ChatBotLink/refs/heads/main/Sex%20Link" target="_blank">Click Link here</a>';      
+      
+      if (msg.includes("info")) return 'Link: <a href="https://royenigmatic.github.io/NgocHoang.Wed/" target="_blank">info me👤</a>';
+      
+      if (msg.includes(":)")) return "haha có gì vui hả, kể tui nghe coii 0_o";
+      if (msg.includes(":(")) return "ủa sao buồn dữ zạa🥺, có gì tâm sự với tui nè:(";
+      if (msg.includes("🤣")) return "haha có chuyện gì vui daaa";
+      if (msg.includes("ê")) return "này đừng có gọi người ta như thế chứ, phải gọi là aa nhô xê ô HTG BOT ơi bé cần giúp:))";
+      if (msg.includes("htg")) return "ơi toyy nghe có chuyện gì cần tui giúp hả đại ka?";
+      if (msg.includes("hack")) return "hack hack cái quần què nhá bỏ đi mà làm người😾";
+      if (msg.includes("thính")) return "Anh chẳng hứa sẽ mang cả thế giới về cho em,Nhưng anh hứa sẽ nắm tay em đi qua mọi giông bão.Chẳng cần son phấn, em vẫn là người đẹp nhất,Vì với anh, nụ cười em đủ làm cả ngày rực nắng.Không cần hỏi em có yêu anh không~~. Chỉ cần em ở lại, là đủ để tim anh yên bình.";
+      
+      if (msg.includes("xin chào") || msg.includes("hi") || msg.includes("hello")) return "Chào bạn ạa! Tui là HTG BOT, tui ở đây sẽ hỗ trợ bạn hết sức có thể :3!";
+      
+      if (msg.includes("ai là người tạo ra")) return "Chính NgocHoangDzz đã tạo ra tui á, Ngọc Hoàng tuyệt vời nhất :3!";
+
+      if (msg.includes("giúp gì") || msg.includes("bạn có thể giúp gì")) return "Tui có thể gửi bạn các script, link, và hỗ trợ bạn tận tình như một trợ lý siêu đáng iuu :3!";
+
+      if (msg.includes("iu")) return "iuu bạn nhìuu:3";
+      if (msg.includes("ngoan")) return "Dạaa:3 tui ngoan vì có bạn ở đây á :)";
+
+      if (msg.includes("code")) return `Lệnh hiện có:<br>- script tonghop<br>- script1<br>- script2<br>- script main<br>- script cmds<br>- script nor<br>- script vip<br>- link norgit<br>- link vipgit<br>- wed<br>- dis > discord<br>-allsexlink<br>- iu<br>- ngoan<br>- xin chào<br>- hello<br>- hi<br>- ai là người tạo ra<br>- giúp gì<br>- bạn có thể giúp gì<br>- info<br>- :)<br>- :(<br>- 🤣<br>- ê<br>- htg<br>- hack<br>- thính`;
+
+      return " tôi chưa được cập nhật để nói câu này hãy thử nhắn -code- để biết thêm";
+    }
+
+    const chatBox = document.getElementById("chat-box");
+
+    function sendMessage() {
+      const input = document.getElementById("user-input");
+      const message = input.value.trim();
+      if (!message) return;
+
+      chatBox.innerHTML += '<div><strong>Bạn:</strong> ' + message + '</div>';
+      input.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      setTimeout(() => {
+        const reply = smartReply(message);
+        chatBox.innerHTML += '<div><strong>HTG BOT:</strong> ' + reply + '</div>';
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 400);
+    }
+  </script>
+</body>
+</html>
