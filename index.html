@@ -13,7 +13,7 @@
       height: 100%;
       font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
-      background: url('https://cdn.discordapp.com/attachments/1370542456361324596/1370780024273375353/bd054497ce4283eb16911911eb8d1f1b.jpg?ex=682166a1&is=68201521&hm=f8df8f8523b9ace35abd6230f7670157ca347abcb8b2d64dbc90102258bb08fd&') no-repeat center center fixed;
+      background: url('https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/79507507cb50eb148a6b9125c82eb10d.jpg') no-repeat center center fixed;
       background-size: cover;
     }
     .logo {
@@ -67,11 +67,81 @@
       font-weight: bold;
       cursor: pointer;
     }
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      color: white;
+      background: rgba(0,0,0,0.4);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 3;
+    }
+    .menu-popup {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background-color: rgba(0,0,0,0.85);
+      border-radius: 12px;
+      display: none;
+      flex-direction: column;
+      z-index: 4;
+      padding: 10px;
+      gap: 10px;
+    }
+    .menu-popup div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      color: white;
+      font-size: 15px;
+      padding: 5px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .menu-popup div:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .menu-popup img {
+      width: 60px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid white;
+    }
   </style>
 </head>
 <body>
   <div class="logo">
     <img src="https://i.ibb.co/7t9rgxxz/Messenger-creation-90-FCED4-D-D1-F8-4-FCB-9036-ADFA6-C41-AF5-F.jpg" alt="HTG BOT">
+  </div>
+
+  <div class="menu-button" onclick="toggleMenu()">☰</div>
+
+  <div class="menu-popup" id="menu-popup">
+    <div onclick="changeBackground('https://cdn.discordapp.com/attachments/1370542456361324596/1371328984058560552/IMG_20250502_111428.jpg?ex=6822bd23&is=68216ba3&hm=55855855bc3aa28869cd95ca7e40615ab826ea76efbca1e8836823333dbcc46c&')">
+      <img src="https://cdn.discordapp.com/attachments/1370542456361324596/1371328984058560552/IMG_20250502_111428.jpg?ex=6822bd23&is=68216ba3&hm=55855855bc3aa28869cd95ca7e40615ab826ea76efbca1e8836823333dbcc46c&" alt="bg1">
+      Giao diện genshi 1
+    </div>
+    <div onclick="changeBackground('https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/ed6242df23da06d6128a8e00504e16af.jpg')">
+      <img src="https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/ed6242df23da06d6128a8e00504e16af.jpg" alt="bg2">
+      Giao diện genshi 2
+    </div>
+    <div onclick="changeBackground('https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/f786cd614cfe9ef762351780b586c1b8.jpg')">
+      <img src="https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/f786cd614cfe9ef762351780b586c1b8.jpg" alt="bg2">
+      Giao diện genshi 3
+    </div>
+    <div onclick="changeBackground('https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/157def2b8be213a4504b397501d54352.jpg')">
+      <img src="https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/157def2b8be213a4504b397501d54352.jpg" alt="bg2">
+      Giao diện loli 1
+    </div>
+    <div onclick="changeBackground('https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/file_0000000064f06230a0f65b2da5eda698.png')">
+      <img src="https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/file_0000000064f06230a0f65b2da5eda698.png" alt="bg3">
+      Giao diện HTG
+    </div>
   </div>
 
   <div class="chat-container">
@@ -85,9 +155,19 @@
   </div>
 
   <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu-popup");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+
+    function changeBackground(url) {
+      document.body.style.background = `url('${url}') no-repeat center center fixed`;
+      document.body.style.backgroundSize = "cover";
+      toggleMenu();
+    }
+
     function smartReply(message) {
       const msg = message.toLowerCase();
-      
       if (msg.includes("script tonghop")) return 'Script Tổng Hợp: <a href="https://notevn.com/raw/80u2yaw3" target="_blank">Script Link</a>';
       if (msg.includes("script main")) return 'Script main HTG: <a href="https://notevn.com/raw/3fyqked5" target="_blank">Script Link</a>';
       if (msg.includes("script cmds")) return 'Script cmds: <a href="https://notevn.com/raw/97b35dfk" target="_blank">Script Link</a>';
@@ -101,7 +181,7 @@
       if (msg.includes("wed")) return 'Link Wed me: <a href="https://raw.githubusercontent.com/NgocHoangDzz/Trang-wed-C-a-t-i/refs/heads/main/All%20wed%20link" target="_blank">Click Link here</a>';
       if (msg.includes("dis") || msg.includes("discord")) return 'Link Discord: <a href="https://discord.gg/YkRK3DRHN4" target="_blank">Click Link here</a>';
 
-      if (msg.includes("allsexlink")) return 'Link: <a href="https://raw.githubusercontent.com/NgocHoangDzz/ChatBotLink/refs/heads/main/Sex%20Link" target="_blank">Click Link here</a>';      
+      if (msg.includes("allslink")) return 'Link: <a href="https://raw.githubusercontent.com/NgocHoangDzz/ChatBotLink/refs/heads/main/Sex%20Link" target="_blank">Click Link here</a>';      
       
       if (msg.includes("info")) return 'Link: <a href="https://ngochoangdzz.github.io/Info/" target="_blank">info me👤</a>';
       
