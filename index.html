@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="vi">
+<!DOCTYPE html><html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,8 +12,18 @@
       height: 100%;
       font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
-      background: url('https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/79507507cb50eb148a6b9125c82eb10d.jpg') no-repeat center center fixed;
+      background: url('https://i.imgur.com/JL0ELXw.jpeg') no-repeat center center fixed;
       background-size: cover;
+    }
+    #background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      display: none;
     }
     .logo {
       position: fixed;
@@ -91,60 +100,30 @@
       padding: 10px;
       gap: 10px;
     }
-    .menu-popup div {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      color: white;
-      font-size: 15px;
-      padding: 5px;
+    .menu-popup button {
+      padding: 10px;
+      background-color: #00faff;
+      color: black;
+      border: none;
       border-radius: 8px;
-      transition: background 0.2s;
-    }
-    .menu-popup div:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-    .menu-popup img {
-      width: 60px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 6px;
-      border: 1px solid white;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="logo">
+  <video id="background-video" autoplay loop playsinline muted>
+    <source src="https://media.discordapp.net/attachments/1370542456361324596/1371397830748409926/snaptik.vn_ffc5d.mp4?ex=6822fd42&is=6821abc2&hm=f85eb97b5133b41dcd8d8b2edc861d556dae25fff036f7ccb4463d80c585d649&" type="video/mp4">
+  </video>  <div class="logo">
     <img src="https://i.ibb.co/7t9rgxxz/Messenger-creation-90-FCED4-D-D1-F8-4-FCB-9036-ADFA6-C41-AF5-F.jpg" alt="HTG BOT">
-  </div>
-
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
-
-  <div class="menu-popup" id="menu-popup">
-    <div onclick="changeBackground('https://cdn.discordapp.com/attachments/1370542456361324596/1371328984058560552/IMG_20250502_111428.jpg?ex=6822bd23&is=68216ba3&hm=55855855bc3aa28869cd95ca7e40615ab826ea76efbca1e8836823333dbcc46c&')">
-      <img src="https://cdn.discordapp.com/attachments/1370542456361324596/1371328984058560552/IMG_20250502_111428.jpg?ex=6822bd23&is=68216ba3&hm=55855855bc3aa28869cd95ca7e40615ab826ea76efbca1e8836823333dbcc46c&" alt="bg1">
-      Giao diện Xuân Vii 1
-    </div>
-    <div onclick="changeBackground('https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/ed6242df23da06d6128a8e00504e16af.jpg')">
-      <img src="https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/ed6242df23da06d6128a8e00504e16af.jpg" alt="bg2">
-      Giao diện genshi 2
-    </div>
-    <div onclick="changeBackground('https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/f786cd614cfe9ef762351780b586c1b8.jpg')">
-      <img src="https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/f786cd614cfe9ef762351780b586c1b8.jpg" alt="bg2">
-      Giao diện genshi 3
-    </div>
-    <div onclick="changeBackground('https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/157def2b8be213a4504b397501d54352.jpg')">
-      <img src="https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/157def2b8be213a4504b397501d54352.jpg" alt="bg2">
-      Giao diện loli 1
-    </div>
-    <div onclick="changeBackground('https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/file_0000000064f06230a0f65b2da5eda698.png')">
-      <img src="https://raw.githubusercontent.com/NgocHoangDzz/Avt/refs/heads/main/file_0000000064f06230a0f65b2da5eda698.png" alt="bg3">
-      Giao diện HTG
-    </div>
-  </div>
-
-  <div class="chat-container">
+  </div>  <div class="menu-button" onclick="toggleMenu()">☰</div>  <div class="menu-popup" id="menu-popup">
+    <button onclick="toggleMute()" id="sound-btn">Bật âm nền</button>
+    <button onclick="changeVideo('https://media.discordapp.net/attachments/1370542456361324596/1371397800490696734/snaptik.vn_3edb5.mp4?ex=6822fd3a&is=6821abba&hm=33994ca6c6dc3f5499a2603cd818a34f6e73ab33361f511ccc11c8501f713ccc&')">Nền video 1</button>
+    <button onclick="changeVideo('https://media.discordapp.net/attachments/1370542456361324596/1371397755444006962/snaptik.vn_3ea41.mp4?ex=6822fd30&is=6821abb0&hm=7fa2d822df669afd8ac736cab9993ef755efa63cc5bc25f3b13a6389f7da96a0&')">Nền video 2</button>
+    <button onclick="changeVideo('https://media.discordapp.net/attachments/1370542456361324596/1371037314066681908/snaptik.vn_71b32.mp4?ex=68225640&is=682104c0&hm=7373a74c3ad8ea410a36b2f0d2d714c6ccff9ceaefe6bbb3baf43dac6d4a32a6&')">Nền video 3</button>
+    <button onclick="changeImage('https://cdn.discordapp.com/attachments/1370542456361324596/1370780013615648898/file_0000000064f06230a0f65b2da5eda698.png?ex=6822b81f&is=6821669f&hm=e85c2b03a2012bb2a5641e16da6eb5fcc34d77428626444422519b4657b89340&')">Nền 1</button>
+    <button onclick="changeImage('https://cdn.discordapp.com/attachments/1370542456361324596/1370780024273375353/bd054497ce4283eb16911911eb8d1f1b.jpg?ex=6822b821&is=682166a1&hm=2d5724bb9c69fc67d977728ce677a292af376ba81dfe4a737adad06cfeb6ce2e&')">Nền HTG</button>
+  </div>  <div class="chat-container">
     <div class="chat-box" id="chat-box">
       <div><strong>HTG BOT:</strong> Xin chào! Tôi có thể giúp gì cho bạn hôm nay?</div>
     </div>
@@ -152,18 +131,34 @@
       <input type="text" id="user-input" placeholder="Nhập tin nhắn..." />
       <button onclick="sendMessage()">Gửi</button>
     </div>
-  </div>
+  </div>  <script>
+    const video = document.getElementById('background-video');
+    const soundBtn = document.getElementById('sound-btn');
+    const menu = document.getElementById('menu-popup');
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("menu-popup");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    function toggleMute() {
+      video.muted = !video.muted;
+      soundBtn.textContent = video.muted ? 'Bật âm nền' : 'Tắt âm nền';
+      video.play();
     }
 
-    function changeBackground(url) {
+    function changeVideo(url) {
+      video.src = url;
+      video.style.display = 'block';
+      document.body.style.background = 'none';
+      video.load();
+      video.play();
+    }
+
+    function changeImage(url) {
+      video.pause();
+      video.style.display = 'none';
       document.body.style.background = `url('${url}') no-repeat center center fixed`;
-      document.body.style.backgroundSize = "cover";
-      toggleMenu();
+      document.body.style.backgroundSize = 'cover';
+    }
+
+    function toggleMenu() {
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
     }
 
     function smartReply(message) {
@@ -190,6 +185,7 @@
       if (msg.includes(":)")) return "haha có gì vui hả, kể tui nghe coii 0_o";
       if (msg.includes(":(")) return "ủa sao buồn dữ zạa🥺, có gì tâm sự với tui nè:(";
       if (msg.includes("🤣")) return "haha có chuyện gì vui daaa";
+      
       if (msg.includes("ê")) return "này đừng có gọi người ta như thế chứ, phải gọi là aa nhô xê ô HTG BOT ơi bé cần giúp:))";
       if (msg.includes("htg")) return "ơi toyy nghe có chuyện gì cần tui giúp hả đại ka?";
       if (msg.includes("hack")) return "hack hack cái quần què nhá bỏ đi mà làm người😾";
@@ -204,7 +200,7 @@
       if (msg.includes("iu")) return "iuu bạn nhìuu:3";
       if (msg.includes("ngoan")) return "Dạaa:3 tui ngoan vì có bạn ở đây á :)";
 
-      if (msg.includes("code")) return `Lệnh hiện có:<br>- script tonghop<br>- script1<br>- script2<br>- script main<br>- script cmds<br>- script nor<br>- script vip<br>- link norgit<br>- link vipgit<br>- wed<br>- dis > discord<br>-allslink<br>- iu<br>- ngoan<br>- xin chào<br>- hello<br>- hi<br>- ai là người tạo ra<br>- giúp gì<br>- bạn có thể giúp gì<br>- info<br>- :)<br>- :(<br>- 🤣<br>- ê<br>- htg<br>- hack<br>- thính<br>- baocao`;
+      if (msg.includes("code")) return `Lệnh hiện có:<br>- script tonghop<br>- script1<br>- script2<br>- script main<br>- script cmds<br>- script nor<br>- script vip<br>- link norgit<br>- link vipgit<br>- wed<br>- dis > discord<br>-allslink<br>- iu<br>- ngoan<br>- xin chào<br>- hello<br>- hi<br>- ai là người tạo ra<br>- giúp gì<br>- bạn có thể giúp gì<br>- info<br>- :)<br>- :(<br>- 🤣<br>- ê<br>- htg<br>- hack<br>- thính`;
 
       return " tôi chưa được cập nhật để nói câu này hãy thử nhắn -code- để biết thêm";
     }
@@ -226,6 +222,5 @@
         chatBox.scrollTop = chatBox.scrollHeight;
       }, 400);
     }
-  </script>
-</body>
+  </script></body>
 </html>
