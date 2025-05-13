@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTG BOT</title>
+  <link rel="icon" href="https://i.ibb.co/7t9rgxxz/Messenger-creation-90-FCED4-D-D1-F8-4-FCB-9036-ADFA6-C41-AF5-F.jpg" type="image/png">
+  <style>
+    * { box-sizing: border-box; }
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+    #background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      display: none;
+    }
+    .logo {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 12;
+      display: none; /* Ẩn logo mặc định */
+    }
+    .logo img {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      border: 2px solid white;
+    }
+    .discord-logo {
+      position: fixed;
+      top: 90px;
+      left: 20px;
+      z-index: 12;
+      display: none; /* Ẩn Discord mặc định */
+    }
+    .discord-logo img {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      border: 2px solid white;
+      cursor: pointer;
+    }
+    .chat-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px;
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      color: white;
+      padding: 5px 5px 5px 100px;
+    }
+    .chat-input {
+      display: flex;
+      gap: 10px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: none;
+    }
+    .chat-input button {
+      padding: 10px 20px;
+      background-color: #00faff;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      color: white;
+      background: rgba(0,0,0,0.4);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 3;
+    }
+    .menu-popup {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background-color: rgba(0,0,0,0.85);
+      border-radius: 12px;
+      display: none;
+      flex-direction: column;
+      z-index: 4;
+      padding: 10px;
+      gap: 10px;
+    }
+    .menu-popup .username-display {
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 5px;
+      text-align: center;
+    }
+    .menu-popup button {
+      padding: 10px;
+      background-color: #00faff;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .login-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+    .login-box {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.1s;
+    }
+    .login-box.shake {
+      animation: shake 0.5s;
+    }
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-10px, 0); }
+      40% { transform: translate(10px, 0); }
+      60% { transform: translate(-10px, 0); }
+      80% { transform: translate(10px, 0); }
+      100% { transform: translate(0, 0); }
+    }
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: white;
+      font-size: 24px;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-bottom: 1px solid white;
+      background: transparent;
+      color: white;
+      outline: none;
+    }
+    .login-box input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .login-box a {
+      color: #00faff;
+      text-decoration: none;
+      font-size: 12px;
+      display: block;
+      margin: 10px 0;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background: white;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .login-box p {
+      color: white;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+    .success-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 255, 0, 0.8);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: none;
+      z-index: 11;
+    }
+  </style>
+</head>
+<body>
+  <!-- Logo và Discord chỉ hiển thị sau khi đăng nhập -->
+  <div class="logo" id="logo">
+    <img src="https://i.ibb.co/7t9rgxxz/Messenger-creation-90-FCED4-D-D1-F8-4-FCB-9036-ADFA6-C41-AF5-F.jpg" alt="HTG BOT">
+  </div>
+  <div class="discord-logo" id="discord-logo">
+    <a href="https://discord.gg/xZteb6xhqM" target="_blank">
+      <img src="https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHM0OYfiFeMI2p9MWie0CvL99U4GA1gf6_kayTt_kBblFwHwo8BW8JXlqfnYxKPmmBevsdZpJiIhrXJKvOSYipsaHqFIbCP6s5rOtPA59rEWG0TDcTxZjqTOH7KyNDpp3SdjDoloGHqOiM0jglAUqKA4-&format=source&h=307" alt="Discord">
+    </a>
+  </div>
+
+  <!-- Giao diện đăng nhập -->
+  <div class="login-container" id="login-container">
+    <div class="login-box">
+      <h2>Login</h2>
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <a href="#" id="forget-password" onclick="showForgetPassword()">Forget Password</a>
+      <a href="https://discord.gg/xZteb6xhqM" target="_blank">Tham gia Discord</a>
+      <button onclick="login()">Log in</button>
+      <p id="login-error" style="color: red; display: none;">Sai mật khẩu!</p>
+    </div>
+  </div>
+
+  <!-- Thông báo thành công -->
+  <div class="success-message" id="success-message">Đăng nhập thành công!</div>
+
+  <!-- Nội dung chính (chỉ hiển thị sau khi đăng nhập) -->
+  <div class="main-content" id="main-content" style="display: none;">
+    <video id="background-video" autoplay loop playsinline muted>
+      <source src="https://media.discordapp.net/attachments/1370542456361324596/1371397830748409926/snaptik.vn_ffc5d.mp4?ex=6822fd42&is=6821abc2&hm=f85eb97b5133b41dcd8d8b2edc861d556dae25fff036f7ccb4463d80c585d649&" type="video/mp4">
+    </video>
+    <div class="menu-button" onclick="toggleMenu()">☰</div>
+    <div class="menu-popup" id="menu-popup">
+      <div class="username-display" id="username-display"></div>
+      <button onclick="toggleMute()" id="sound-btn">Bật âm nền</button>
+      <button onclick="changeVideo('https://media.discordapp.net/attachments/1370542456361324596/1371397800490696734/snaptik.vn_3edb5.mp4?ex=6822fd3a&is=6821abba&hm=33994ca6c6dc3f5499a2603cd818a34f6e73ab33361f511ccc11c8501f713ccc&')">Nền vid 1</button>
+      <button onclick="changeVideo('https://media.discordapp.net/attachments/1370542456361324596/1371397830748409926/snaptik.vn_ffc5d.mp4?ex=6822fd42&is=6821abc2&hm=f85eb97b5133b41dcd8d8b2edc861d556dae25fff036f7ccb4463d80c585d649&')">Nền vid 2</button>
+      <button onclick="changeVideo('https://media.discordapp.net/attachments/1370542456361324596/1371397755444006962/snaptik.vn_3ea41.mp4?ex=6822fd30&is=6821abb0&hm=7fa2d822df669afd8ac736cab9993ef755efa63cc5bc25f3b13a6389f7da96a0&')">Nền vid 3</button>
+      <button onclick="changeVideo('https://media.discordapp.net/attachments/1370542456361324596/1371037314066681908/snaptik.vn_71b32.mp4?ex=68225640&is=682104c0&hm=7373a74c3ad8ea410a36b2f0d2d714c6ccff9ceaefe6bbb3baf43dac6d4a32a6&')">Nền vid 4</button>
+      <button onclick="changeImage('https://cdn.discordapp.com/attachments/1370542456361324596/1370780013615648898/file_0000000064f06230a0f65b2da5eda698.png?ex=6822b81f&is=6821669f&hm=e85c2b03a2012bb2a5641e16da6eb5fcc34d77428626444422519b4657b89340&')">Nền HTG</button>      
+      <button onclick="changeImage('https://cdn.discordapp.com/attachments/1370542456361324596/1370780024273375353/bd054497ce4283eb16911911eb8d1f1b.jpg?ex=6822b821&is=682166a1&hm=2d5724bb9c69fc67d977728ce677a292af376ba81dfe4a737adad06cfeb6ce2e&')">Nền 1</button>
+      <button onclick="changeImage('background.png')">Nền 2</button>
+    </div>
+    <div class="chat-container">
+      <div class="chat-box" id="chat-box">
+        <div><strong>HTG BOT:</strong> Xin chào! Tôi có thể giúp gì cho bạn hôm nay?</div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Nhập tin nhắn..." />
+        <button onclick="sendMessage()">Gửi</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const errorMsg = document.getElementById("login-error");
+      const loginBox = document.querySelector(".login-box");
+      const successMsg = document.getElementById("success-message");
+
+      if (password === "HM0OYfiFeMI2p9MWie0C") {
+        document.getElementById("username-display").textContent = `Xin chào, ${username}!`;
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+        document.getElementById("logo").style.display = "block";
+        document.getElementById("discord-logo").style.display = "block";
+        successMsg.style.display = "block";
+        setTimeout(() => {
+          successMsg.style.display = "none";
+        }, 2000);
+        errorMsg.style.display = "none";
+      } else {
+        errorMsg.textContent = "Sai mật khẩu!";
+        errorMsg.style.display = "block";
+        loginBox.classList.add("shake");
+        setTimeout(() => loginBox.classList.remove("shake"), 500);
+      }
+    }
+
+    function showForgetPassword() {
+      alert("Liên hệ admin @ngochoangdzz để lấy lại mật khẩu");
+    }
+
+    function logout() {
+      document.getElementById("login-container").style.display = "flex";
+      document.getElementById("main-content").style.display = "none";
+      document.getElementById("logo").style.display = "none";
+      document.getElementById("discord-logo").style.display = "none";
+      document.getElementById("username").value = ""; // Xóa input username
+      document.getElementById("password").value = ""; // Xóa input password
+    }
+
+    window.onload = function () {
+      // Luôn hiển thị giao diện login khi vào trang
+      document.getElementById("login-container").style.display = "flex";
+      document.getElementById("main-content").style.display = "none";
+      document.getElementById("logo").style.display = "none";
+      document.getElementById("discord-logo").style.display = "none";
+    };
+
+    document.getElementById("menu-popup").innerHTML += `
+      <button onclick="logout()">Đăng xuất</button>
+    `;
+
+    const video = document.getElementById('background-video');
+    const soundBtn = document.getElementById('sound-btn');
+    const menu = document.getElementById('menu-popup');
+
+    function toggleMute() {
+      video.muted = !video.muted;
+      soundBtn.textContent = video.muted ? 'Bật âm nền' : 'Tắt âm nền';
+      video.play();
+    }
+
+    function changeVideo(url) {
+      video.src = url;
+      video.style.display = 'block';
+      document.body.style.background = 'none';
+      video.load();
+      video.play();
+    }
+
+    function changeImage(url) {
+      video.pause();
+      video.style.display = 'none';
+      document.body.style.background = `url('${url}') no-repeat center center fixed`;
+      document.body.style.backgroundSize = 'cover';
+    }
+
+    function toggleMenu() {
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function smartReply(message) {
+      const msg = message.toLowerCase();
+      if (msg.includes("script tonghop")) return 'Script Tổng Hợp: <a href="https://notevn.com/raw/80u2yaw3" target="_blank">Script Link</a>';
+      if (msg.includes("script main")) return 'Script main HTG: <a href="https://notevn.com/raw/3fyqked5" target="_blank">Script Link</a>';
+      if (msg.includes("script cmds")) return 'Script cmds: <a href="https://notevn.com/raw/97b35dfk" target="_blank">Script Link</a>';
+      if (msg.includes("script1")) return 'Script Tổng Hợp 1: <a href="https://notevn.com/raw/97b35dfk" target="_blank">Script Link</a>';
+      if (msg.includes("script2")) return 'Script Tổng Hợp 2: <a href="https://notevn.com/raw/97b35dfk" target="_blank">Script Link</a>';
+      if (msg.includes("script nor")) return ' All Script nor: <a href="https://raw.githubusercontent.com/NgocHoangDzz/Nor-and-Vip/refs/heads/main/Normal%20script" target="_blank">Script Normal Link</a>';
+      if (msg.includes("script vip")) return ' All Script VIP: <a href="https://raw.githubusercontent.com/NgocHoangDzz/Nor-and-Vip/refs/heads/main/Vip%20script" target="_blank">Script VIP Link</a>';
+
+      if (msg.includes("link norgit")) return 'Link nor: <a href="https://raw.githubusercontent.com/NgocHoangDzz/BotChat/refs/heads/main/Normal%20BOT%20Link" target="_blank">Click Link here</a>';
+      if (msg.includes("link vipgit")) return 'Link VIP: <a href="https://raw.githubusercontent.com/NgocHoangDzz/BotChat/refs/heads/main/BOT-Link%20All" target="_blank">VIP Link👑</a>';
+      if (msg.includes("wed")) return 'Link Wed me: <a href="https://raw.githubusercontent.com/NgocHoangDzz/Trang-wed-C-a-t-i/refs/heads/main/All%20wed%20link" target="_blank">Click Link here</a>';
+      if (msg.includes("dis") || msg.includes("discord")) return 'Link Discord: <a href="https://discord.gg/YkRK3DRHN4" target="_blank">Click Link here</a>';
+      
+      if (msg.includes("baocao")) return 'Link: <a href="https://discord.gg/9hGdBdFD" target="_blank">Bấm Vô Để Báo  Lỗi</a>';
+
+      if (msg.includes("allslink")) return 'Link: <a href="https://raw.githubusercontent.com/NgocHoangDzz/ChatBotLink/refs/heads/main/Sex%20Link" target="_blank">Click Link here</a>';      
+      
+      if (msg.includes("info")) return 'Link: <a href="https://ngochoangdzz.github.io/Info/" target="_blank">info me👤</a>';
+      
+      if (msg.includes(":)")) return "haha có gì vui hả, kể tui nghe coii 0_o";
+      if (msg.includes(":(")) return "ủa sao buồn dữ zạa🥺, có gì tâm sự với tui nè:(";
+      if (msg.includes("🤣")) return "haha có chuyện gì vui daaa";
+      if (msg.includes("ok")) return "ý zờiiii quá oke la luôn chứ lị🤭";
+      
+      if (msg.includes("ê")) return "này đừng có gọi người ta như thế chứ, phải gọi là aa nhô xê ô HTG BOT ơi bé cần giúp:))";
+      if (msg.includes("htg")) return "ơi toyy nghe có chuyện gì cần tui giúp hả đại ka?";
+      if (msg.includes("hack")) return "hack hack cái quần què nhá bỏ đi mà làm người😾";
+      if (msg.includes("thính")) return "Anh chẳng hứa sẽ mang cả thế giới về cho em,Nhưng anh hứa sẽ nắm tay em đi qua mọi giông bão.Chẳng cần son phấn, em vẫn là người đẹp nhất,Vì với anh, nụ cười em đủ làm cả ngày rực nắng.Không cần hỏi em có yêu anh không~~. Chỉ cần em ở lại, là đủ để tim anh yên bình.";
+      
+      if (msg.includes("xin chào") || msg.includes("hi") || msg.includes("hello")) return "Chào bạn ạa! Tui là HTG BOT, tui ở đây sẽ hỗ trợ bạn hết sức có thể :3!";
+      
+      if (msg.includes("ai là người tạo ra")) return "Chính NgocHoangDzz đã tạo ra tui á, Ngọc Hoàng tuyệt vời nhất :3!";
+
+      if (msg.includes("giúp gì") || msg.includes("bạn có thể giúp gì")) return "Tui có thể gửi bạn các script, link, và hỗ trợ bạn tận tình như một trợ lý siêu đáng iuu :3!";
+
+      if (msg.includes("iu")) return "iuu bạn nhìuu:3";
+      if (msg.includes("ngoan")) return "Dạaa:3 tui ngoan vì có bạn ở đây á :)";
+
+      if (msg.includes("code")) return `Lệnh hiện có:<br>- script tonghop<br>- script1<br>- script2<br>- script main<br>- script cmds<br>- script nor<br>- script vip<br>- link norgit<br>- link vipgit<br>- wed<br>- dis > discord<br>-allslink<br>- iu<br>- ngoan<br>- xin chào<br>- hello<br>- hi<br>- ai là người tạo ra<br>- giúp gì<br>- bạn có thể giúp gì<br>- info<br>- :)<br>- :(<br>- 🤣<br>- ê<br>- htg<br>- hack<br>- thính<br>- ok`;
+
+      return " tôi chưa được cập nhật để nói câu này hãy thử nhắn -code- để biết thêm";
+    }
+
+    const chatBox = document.getElementById("chat-box");
+
+    function sendMessage() {
+      const input = document.getElementById("user-input");
+      const message = input.value.trim();
+      if (!message) return;
+
+      chatBox.innerHTML += '<div><strong>Bạn:</strong> ' + message + '</div>';
+      input.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      setTimeout(() => {
+        const reply = smartReply(message);
+        chatBox.innerHTML += '<div><strong>HTG BOT:</strong> ' + reply + '</div>';
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 400);
+    }
+  </script>
+</body>
+</html>
